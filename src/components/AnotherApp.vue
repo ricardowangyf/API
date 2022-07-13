@@ -4,7 +4,8 @@
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column fixed prop="data" label="日期" width="150">
       </el-table-column>
-      <el-table-column prop="name" label="姓名" width="120"> </el-table-column>
+      <el-table-column prop="name" label="姓名" width="120"> 
+      </el-table-column>
       <el-table-column prop="province" label="省份" width="120">
       </el-table-column>
       <el-table-column prop="city" label="市区" width="120"> </el-table-column>
@@ -29,7 +30,7 @@
         :before-close="disableClose"
       >
         <el-form-item label="日期" prop="data">
-          <el-input maxlength="50" autocomplete="on" v-model="form.data" />
+          <el-input maxlength="50" autocomplete="on" v-model="form.data"  />
         </el-form-item>
       </el-form>
       <el-form
@@ -49,7 +50,7 @@
         :before-close="disableClose"
       >
         <el-form-item label="省份" prop="province">
-          <el-input maxlength="50" autocomplete="on" v-model="form.province" />
+          <el-input maxlength="50" autocomplete="on" v-model.trim="form.province" />
         </el-form-item>
       </el-form>
       <el-form
@@ -98,6 +99,7 @@ export default {
   data() {
     return {
       tableData: [],
+      
       dialogFormVisible: false,
       springframe: [
         { label: "日期", prop: "data" },
