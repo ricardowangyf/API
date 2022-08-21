@@ -1,5 +1,8 @@
 <template>
   <div class="juzhogn">
+    <img src="https://avatars.githubusercontent.com/u/81006817?v=4" alt="我的头像">
+    <div>{{users.name}}</div>
+
     <!-- {{ dialogFormVisible }} -->
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column fixed prop="data" label="日期" width="150">
@@ -50,7 +53,7 @@
         :before-close="disableClose"
       >
         <el-form-item label="省份" prop="province">
-          <el-input maxlength="50" autocomplete="on" v-model.trim="form.province" />
+          <el-input maxlength="50" autocomplete="on" v-model="form.province" />
         </el-form-item>
       </el-form>
       <el-form
@@ -59,7 +62,7 @@
         ref="form"
         :before-close="disableClose"
       >
-        <el-form-item label="市区" prop="province">
+        <el-form-item label="市区" prop="city">
           <el-input maxlength="50" autocomplete="on" v-model="form.city" />
         </el-form-item>
       </el-form>
@@ -69,7 +72,7 @@
         ref="form"
         :before-close="disableClose"
       >
-        <el-form-item label="地址" prop="province">
+        <el-form-item label="地址" prop="address">
           <el-input maxlength="50" autocomplete="on" v-model="form.address" />
         </el-form-item>
       </el-form>
@@ -79,7 +82,7 @@
         ref="form"
         :before-close="disableClose"
       >
-        <el-form-item label="邮编" prop="province">
+        <el-form-item label="邮编" prop="zip">
           <el-input maxlength="50" autocomplete="on" v-model="form.zip" />
         </el-form-item>
       </el-form>
@@ -92,12 +95,15 @@
   </div>
 </template>
 
-<script>
-import { reqCategoryList } from "../API/index";
+<script >
+import { getUserInfo, reqCategoryList } from "../API/index";
 
 export default {
   data() {
     return {
+      users: {
+
+      },
       tableData: [],
       
       dialogFormVisible: false,
@@ -145,6 +151,11 @@ export default {
     reqCategoryList().then((data) => {
       console.log("数据内容>>>>>", data.data);
       this.tableData = data.data;
+    });
+    getUserInfo().then((data) => {
+      console.log("数据内容>>>>>", data.data);
+      // this.tableData = data.data;
+      this.users = data.data
     });
   },
 };
